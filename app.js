@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     //create your board
     function createBoard () {
         for (let i = 0; i < cardArray.length; i++) {
-            var card = document.createElement('img');
+            const card = document.createElement('img');
             card.setAttribute('src', './images/blank.png');
             card.setAttribute('data-id', i);
             card.addEventListener('click', flipCard)
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     //check for matches
     
     function checkForMatch () {
-        var cards = document.querySelectorAll('img')
+        const cards = document.querySelectorAll('img')
         const optionOneId = cardsChosenId[0];
         const optionTwoId = cardsChosenId[1];
         if (cardsChosen[0] === cardsChosen[1]) {
@@ -96,14 +96,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
     //flip your card
     
     function flipCard () {
-        var cardId = this.getAttribute('data-id');
-        console.log("flipCard -> cardId", cardId)
+        const cardId = this.getAttribute('data-id');
         if (cardsChosenId.length ===1 && cardsChosenId[0]==cardId){return}//check that don't click on the same picture twice
         if(this.src.search('white.png')!=-1){return} //check that don't click on the white picture
         cardsChosen.push(cardArray[cardId].name);
-        console.log("flipCard -> cardsChosen", cardsChosen)
         cardsChosenId.push(cardId);
-        console.log("flipCard -> cardsChosenId", cardsChosenId)
         this.setAttribute('src', cardArray[cardId].img)
         if(cardsChosen.length === 2) {
             setTimeout(checkForMatch, 100) 
