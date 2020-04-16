@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
     cardArray.sort(()=> 0.5 - Math.random())
 
     const grid = document.querySelector('.grid');
-    var resultDisplay = document.querySelector('#result')
-    var cardsChosen = [];
-    var cardsChosenId = [];
-    var cardsWon = [];
+    let resultDisplay = document.querySelector('#result')
+    let cardsChosen = [];
+    let cardsChosenId = [];
+    let cardsWon = [];
     //create your board
     function createBoard () {
         for (let i = 0; i < cardArray.length; i++) {
@@ -97,13 +97,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
     function flipCard () {
         var cardId = this.getAttribute('data-id');
-        // if (cardsChosenId.length ===1 && cardsChosenId[0]==cardId){return}
-        // if(this.src.search('white.png')!=-1){return}
+        console.log("flipCard -> cardId", cardId)
+        if (cardsChosenId.length ===1 && cardsChosenId[0]==cardId){return}//check that don't click on the same picture twice
+        if(this.src.search('white.png')!=-1){return} //check that don't click on the white picture
         cardsChosen.push(cardArray[cardId].name);
+        console.log("flipCard -> cardsChosen", cardsChosen)
         cardsChosenId.push(cardId);
+        console.log("flipCard -> cardsChosenId", cardsChosenId)
         this.setAttribute('src', cardArray[cardId].img)
         if(cardsChosen.length === 2) {
-            setTimeout(checkForMatch, 500) 
+            setTimeout(checkForMatch, 100) 
         }
     }
     createBoard();
